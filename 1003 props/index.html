@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Props</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+
+    <script type="text/babel">
+      class Game extends React.Component {
+        render() {
+          return (
+            <div>
+              <h1>{this.props.name}</h1>
+              <h2>{this.props.age}</h2>
+            </div>
+          );
+        }
+      };
+      
+      const place = document.getElementById('example');
+
+      ReactDOM.render(
+        <div>
+          <Game name="Forza" age="18+" />
+          <Game name="CS:GO" age="16+" />
+          <Game name="Little prince" age="3+" />
+        </div>,
+        place
+      );
+    </script>
+  </body>
+</html>

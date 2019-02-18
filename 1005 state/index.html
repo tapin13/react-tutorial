@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Props</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div id="program"></div>
+
+    <script type="text/babel">
+      class Check extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            checked: true
+          }
+        };
+
+        handleCheck = () => {
+          console.log('checked');
+          this.setState( { checked: !this.state.checked } );
+        };
+
+        render() {
+          let message;
+          if(this.state.checked) {
+            message = "selected";
+          } else {
+            message = "not selected";
+          }
+
+          return (
+            <div>
+              <input type="checkbox" onChange={this.handleCheck} defaultChecked={this.state.checked} />
+              <p>Checkbox {message}</p>
+            </div>
+          );
+        };
+      };
+      
+      const app = document.getElementById('program');
+
+      ReactDOM.render(
+        <div className="field">
+          <Check>Hey</Check>
+          <Check>Task 2</Check>
+          <Check>Cu tomorrow</Check>
+        </div>,
+        app
+      );
+    </script>
+  </body>
+</html>

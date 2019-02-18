@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>State</title>
+    <script src="js/react.development.js"></script>
+    <script src="js/react-dom.development.js"></script>
+    <script src="js/babel.min.js"></script>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <div id="program"></div>
+
+    <script type="text/babel">
+      class Task extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { edit: false };
+        }
+
+        edit = () => {
+          this.setState( { edit: true } );
+        }
+
+        save = () => {
+          this.setState( { edit: false } );
+          let value = this.refs.newText.value;
+          console.log('save value', value);
+        }
+
+        delete = () => {
+          console.log("Delete");
+        }
+
+        rendNormal = () => {
+          return (
+            <div className="box">
+              <div className="text">{this.props.children}</div>
+              <button onClick={this.edit} className="btn light">Edit</button>
+              <button onClick={this.delete} className="btn red">Delete</button>
+            </div>
+          );
+        }
+
+        rendEdit = () => {
+          return (
+            <div className="box">
+              <textarea ref="newText" defaultValue={this.props.children}></textarea>
+              <button onClick={this.save} className="btn success">Save</button>
+            </div>
+          );
+        }
+
+        render() {
+          if(this.state.edit) {
+            return this.rendEdit();
+          } else {
+            return this.rendNormal();
+          }
+        }
+      };
+      
+      const app = document.getElementById('program');
+
+      ReactDOM.render(
+        <div className="field">
+          <Task>Hey</Task>
+          <Task>Task 2</Task>
+          <Task>Cu tomorrow</Task>
+        </div>,
+        app
+      );
+    </script>
+  </body>
+</html>
